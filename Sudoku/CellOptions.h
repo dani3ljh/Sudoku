@@ -8,5 +8,6 @@ private:
 public:
 	CellOptions();
 	int removeOption(int option);
-	bool getOption(int option);
+	bool getOption(int option) const;
+	int setRandomOption();
 };

@@ -31,7 +31,7 @@ bool SudokuBoard::generateBoard()
 		int randIndex = rand() % leastOptionCells.size();
 		pair<int, int> randPoint = leastOptionCells[randIndex];
 		
-		// TODO: finish method
+		
 	}
 
 	return true;

@@ -1,5 +1,7 @@
 #include "CellOptions.h"
 #include <cassert>
+#include <stdlib.h>
+
 
 CellOptions::CellOptions()
 {
@@ -31,10 +33,25 @@ int CellOptions::removeOption(int option)
 
 /// <param name="option">Option to get (1-9)</param>
 /// <returns>Option</returns>
-bool CellOptions::getOption(int option)
+bool CellOptions::getOption(int option) const
 {
 	if (option >= 1 && option <= 9)
 		return options[option - 1];
 
 	return false;
+}
+
+int CellOptions::setRandomOption()
+{
+	// TODO: test this method :D
+	int randomIndex = 1 + rand() % 9;
+	int optionIndex = 0;
+	while (randomIndex > 1) {
+		optionIndex++;
+		randomIndex--;
+		options[optionIndex] = false;
+	}
+	totalOptions = 1;
+	options[optionIndex] = true;
+	return optionIndex;
 }

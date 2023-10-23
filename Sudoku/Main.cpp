@@ -6,7 +6,13 @@ int main()
 {
 	SudokuBoard board = SudokuBoard::SudokuBoard();
 
-	cout << "Board: " << board << endl;
+	CellOptions opts = CellOptions::CellOptions();
+
+	opts.removeOption(1);
+	opts.removeOption(3);
+	opts.removeOption(7);
+
+	cout << opts.setRandomOption() << endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
