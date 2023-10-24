@@ -1,4 +1,6 @@
 #pragma once
+#include <random>
+using namespace std;
 
 class CellOptions
 {
@@ -9,5 +11,5 @@ public:
 	CellOptions();
 	int removeOption(int option);
 	bool getOption(int option) const;
-	int setRandomOption();
+	int setRandomOption(mt19937& gen);
 };

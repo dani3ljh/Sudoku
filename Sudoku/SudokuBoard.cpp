@@ -1,5 +1,6 @@
 #include "SudokuBoard.h"
 #include <vector>
+#include <random>
 using namespace std;
 
 SudokuBoard::SudokuBoard()
@@ -22,6 +23,9 @@ int SudokuBoard::getElement(int row, int col) const
 
 bool SudokuBoard::generateBoard()
 {
+	// make seed for each random cell picker
+	mt19937 gen(random_device{}());
+
 	while (true) {
 		vector<pair<int, int>> leastOptionCells = findLeastOptions();
 
@@ -31,7 +35,8 @@ bool SudokuBoard::generateBoard()
 		int randIndex = rand() % leastOptionCells.size();
 		pair<int, int> randPoint = leastOptionCells[randIndex];
 		
-		
+		int valSet = options[randPoint.first, randPoint.second]->setRandomOption(gen);
+		data[randPoint.first][randPoint.second] = valSet;
 	}
 
 	return true;

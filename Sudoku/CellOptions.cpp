@@ -1,7 +1,7 @@
 #include "CellOptions.h"
 #include <cassert>
 #include <stdlib.h>
-
+using namespace std;
 
 CellOptions::CellOptions()
 {
@@ -41,17 +41,27 @@ bool CellOptions::getOption(int option) const
 	return false;
 }
 
-int CellOptions::setRandomOption()
+int CellOptions::setRandomOption(mt19937& gen)
 {
-	// TODO: test this method :D
-	int randomIndex = 1 + rand() % 9;
-	int optionIndex = 0;
-	while (randomIndex > 1) {
-		optionIndex++;
-		randomIndex--;
-		options[optionIndex] = false;
+	uniform_int_distribution<int> distribution(0, totalOptions - 1);
+	int randomIndex = distribution(gen);
+	int res = -1;
+
+	// doing this roundabout loop thing cause i want all the other cells to be false
+	for (int i = 0; i < 9; i++) {
+		if (!options[i])
+			continue;
+
+		if (randomIndex != 0) {
+			randomIndex--;
+			options[i] = false;
+			continue;
+		}
+		
+		totalOptions = 1;
+		options[i] = true;
+		res = i + 1;
 	}
-	totalOptions = 1;
-	options[optionIndex] = true;
-	return optionIndex;
+
+	return res;
 }
